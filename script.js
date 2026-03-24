@@ -9,7 +9,8 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
   const email = document.getElementById("email").value;
   const message = document.getElementById("message").value;
 
-  fetch("http://127.0.0.1:5000/contact", {
+
+  fetch("https://portfolio-dhanush-3.onrender.com/contact", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
