@@ -1,23 +1,32 @@
+console.log("JS Loaded");
 
-document.querySelector("form").addEventListener("submit", function(e) {
+document.getElementById("contactForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const data = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    message: document.getElementById("message").value
-  };
+  console.log("Form submitted");
 
-  fetch("http://localhost:5000/submit", {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  fetch("http://127.0.0.1:5000/contact", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      message: message
+    })
   })
-  .then(res => res.json())
+  .then(response => response.json())
   .then(data => {
-    alert(data.message);
+    alert("Message sent successfully!");
+    console.log(data);
   })
-  .catch(err => console.log(err));
+  .catch(error => {
+    console.error("Error:", error);
+    alert("Error sending message");
+  });
 });
